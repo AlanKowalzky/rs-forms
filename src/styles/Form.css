@@ -25,7 +25,8 @@ label {
   color: #333;
 }
 
-input, select {
+input,
+select {
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -33,13 +34,15 @@ input, select {
   transition: border-color 0.3s;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #4a90e2;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
 }
 
-input.error, select.error {
+input.error,
+select.error {
   border-color: #f44336;
 }
 
@@ -55,7 +58,7 @@ input.error, select.error {
   gap: 0.5rem;
 }
 
-.checkbox-group input[type="checkbox"] {
+.checkbox-group input[type='checkbox'] {
   width: 1.25rem;
   height: 1.25rem;
 }
@@ -98,7 +101,9 @@ input.error, select.error {
 
 .strength-meter-fill {
   height: 100%;
-  transition: width 0.3s, background-color 0.3s;
+  transition:
+    width 0.3s,
+    background-color 0.3s;
 }
 
 .strength-text {
