@@ -32,7 +32,8 @@ select {
   border-radius: 4px;
   font-size: 1rem;
   transition: border-color 0.3s;
-  /* color: #3a7bc8; */
+  color: #3a7bc8;
+}
 input:focus,
 select:focus {
   outline: none;
@@ -134,6 +135,8 @@ select.error {
   padding: 0.75rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  color: #333333; /* Darker text color for better readability */
+  font-weight: 500; /* Slightly bolder text */
 }
 
 .autocomplete-item:hover {
