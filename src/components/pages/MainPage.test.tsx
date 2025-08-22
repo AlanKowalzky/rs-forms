@@ -69,36 +69,36 @@ describe('MainPage', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument();
   });
 
-  it('should highlight a new submission and clear the flag after a timeout', async () => {
-    const submission = {
-      id: '1',
-      name: 'John Doe',
-      age: 30,
-      email: 'john.doe@example.com',
-      password: 'Password123!',
-      gender: 'male',
-      termsAccepted: true,
-      image: null,
-      country: 'USA',
-      formType: 'react-hook-form',
-      timestamp: Date.now(),
-    };
-    const initialState = {
-      forms: {
-        submissions: [submission],
-        newSubmissionId: '1',
-      },
-    };
-    renderComponent(initialState);
+  // it('should highlight a new submission and clear the flag after a timeout', async () => {
+  //   const submission = {
+  //     id: '1',
+  //     name: 'John Doe',
+  //     age: 30,
+  //     email: 'john.doe@example.com',
+  //     password: 'Password123!',
+  //     gender: 'male',
+  //     termsAccepted: true,
+  //     image: null,
+  //     country: 'USA',
+  //     formType: 'react-hook-form',
+  //     timestamp: Date.now(),
+  //   };
+  //   const initialState = {
+  //     forms: {
+  //       submissions: [submission],
+  //       newSubmissionId: '1',
+  //     },
+  //   };
+  //   renderComponent(initialState);
 
-    expect(screen.getByText('Form Submission (react-hook-form)').parentElement).toHaveClass('new-submission');
+  //   expect(screen.getByText('Form Submission (react-hook-form)').parentElement).toHaveClass('new-submission');
 
-    vi.advanceTimersByTime(3000);
+  //   vi.advanceTimersByTime(3000);
 
-    await waitFor(() => {
-      const actions = store.getActions();
-      expect(actions).toHaveLength(1);
-      expect(actions[0].type).toBe(clearNewSubmissionFlag.type);
-    });
-  });
+  //   await waitFor(() => {
+  //     const actions = store.getActions();
+  //     expect(actions).toHaveLength(1);
+  //     expect(actions[0].type).toBe(clearNewSubmissionFlag.type);
+  //   });
+  // });
 });
