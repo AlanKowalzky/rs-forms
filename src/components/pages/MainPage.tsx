@@ -93,7 +93,7 @@ const MainPage = () => {
             onClick={() => handleOpenModal('uncontrolled')}
           >
             Uncontrolled Components Form
-          </button>{' '}
+          </button>
           <button
             className="nav-link"
             onClick={() => handleOpenModal('react-hook-form')}
@@ -101,7 +101,7 @@ const MainPage = () => {
             React Hook Form
           </button>
         </div>{' '}
-      </div>
+</div>
       <div className="submissions-container">
         <h2>Form Submissions</h2>
         {submissions.length === 0 ? (
@@ -122,8 +122,9 @@ const MainPage = () => {
         )}
         {modalFormType === 'react-hook-form' && (
           <ReactHookFormPage onCloseModal={handleCloseModal} />
-        )}
-    </div>
+        )}{' '}
+      </Modal>
+</div>
   );
 };
 
