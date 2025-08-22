@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// Usuwamy useNavigate, nie będziemy nawigować, tylko zamykać modal
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,8 +23,13 @@ interface FormInputs {
   country: string;
 }
 
-const ReactHookFormPage = () => {
-  const navigate = useNavigate();
+// Dodaj props onCloseModal
+interface ReactHookFormPageProps {
+  onCloseModal: () => void;
+}
+
+const ReactHookFormPage = ({ onCloseModal }: ReactHookFormPageProps) => {
+  // const navigate = useNavigate(); // Usuwamy useNavigate
   const dispatch = useAppDispatch();
   const countries = useAppSelector((state) => state.countries.list);
 
@@ -111,7 +116,8 @@ const ReactHookFormPage = () => {
       })
     );
 
-    navigate('/');
+    // Zamiast navigate, wywołaj onCloseModal
+    onCloseModal();
   };
 
   return (

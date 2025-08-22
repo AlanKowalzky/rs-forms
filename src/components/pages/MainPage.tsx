@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// Importujemy już nie Link, a Button, ponieważ będziemy otwierać modal
 import { useAppSelector, useAppDispatch } from '../../store';
 import { clearNewSubmissionFlag, FormData } from '../../store/formsSlice';
+import { openModal, closeModal } from '../../store/modalSlice'; // Importuj akcje modala
+import Modal from '../Modal'; // Importuj komponent Modal
 import '../../styles/MainPage.css';
+import UncontrolledForm from './UncontrolledForm'; // Importuj komponenty formularzy
+import ReactHookFormPage from './ReactHookForm';
 
 const MainPage = () => {
   const { submissions, newSubmissionId } = useAppSelector(
@@ -10,6 +14,9 @@ const MainPage = () => {
   );
   const dispatch = useAppDispatch();
 
+  const { isOpen: isModalOpen, formType: modalFormType } = useAppSelector(
+    (state) => state.modal
+  ); // Pobierz stan modala
   useEffect(() => {
     // Clear the new submission flag after 3 seconds
     if (newSubmissionId) {
@@ -20,6 +27,14 @@ const MainPage = () => {
       return () => clearTimeout(timer);
     }
   }, [newSubmissionId, dispatch]);
+
+  const handleOpenModal = (type: 'uncontrolled' | 'react-hook-form') => {
+    dispatch(openModal(type));
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+  };
 
   const renderFormData = (submission: FormData) => {
     const isNew = submission.id === newSubmissionId;
@@ -72,12 +87,18 @@ const MainPage = () => {
       <div className="navigation">
         <h2>Choose a Form Type:</h2>
         <div className="nav-links">
-          <Link to="/uncontrolled-form" className="nav-link">
+          {/* Zmień Linki na Buttony */}
+          <button
+            className="nav-link"
+            onClick={() => handleOpenModal('uncontrolled')}
+          >
             Uncontrolled Components Form
-          </Link>
-          <Link to="/react-hook-form" className="nav-link">
+          </button>
+          <button
+            className="nav-link"
+            onClick={() => handleOpenModal('react-hook-form')}
+          >
             React Hook Form
-          </Link>
         </div>
       </div>
 
@@ -93,6 +114,15 @@ const MainPage = () => {
           </div>
         )}
       </div>
+
+      {/* Renderuj Modal */}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        {modalFormType === 'uncontrolled' && (
+          <UncontrolledForm onCloseModal={handleCloseModal} />
+        )}
+        {modalFormType === 'react-hook-form' && (
+          <ReactHookFormPage onCloseModal={handleCloseModal} />
+        )}
     </div>
   );
 };

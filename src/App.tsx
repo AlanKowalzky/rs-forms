@@ -2,8 +2,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { store } from './store';
 import MainPage from './components/pages/MainPage';
-import UncontrolledForm from './components/pages/UncontrolledForm';
-import ReactHookFormPage from './components/pages/ReactHookForm';
+// Usuwamy importy formularzy, ponieważ będą renderowane w modalach
+// import UncontrolledForm from './components/pages/UncontrolledForm';
 import './App.css';
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/uncontrolled-form" element={<UncontrolledForm />} />
-          <Route path="/react-hook-form" element={<ReactHookFormPage />} />
+          {/* Usuwamy Route dla formularzy */}
+          {/* <Route path="/uncontrolled-form" element={<UncontrolledForm />} /> */}
         </Routes>
       </BrowserRouter>
     </Provider>
