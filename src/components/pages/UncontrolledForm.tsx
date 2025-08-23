@@ -131,10 +131,7 @@ const UncontrolledForm: React.FC<UncontrolledFormProps> = ({ onClose }) => {
 
         if (yupError.inner) {
           yupError.inner.forEach((err: import('yup').ValidationError) => {
-            if (err.path) {
-              // Added check for err.path
-              newErrors[err.path] = err.message;
-            }
+            newErrors[err.path ?? ''] = err.message;
           });
         }
 
