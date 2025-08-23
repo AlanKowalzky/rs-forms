@@ -23,5 +23,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "node_modules/@types/redux-mock-store/index.d.ts" // Explicitly include the type definition file
+  ]
 }
