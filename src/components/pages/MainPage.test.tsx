@@ -9,6 +9,14 @@ import { FormsState } from '../../store/formsSlice';
 
 const mockStore = configureStore([thunk]);
 
+// Define the RootState type for the mock store
+interface RootState {
+  forms: FormsState;
+  countries: {
+    list: string[];
+  };
+}
+
 describe('MainPage', () => {
   let store: ReturnType<typeof mockStore>;
 
@@ -20,7 +28,8 @@ describe('MainPage', () => {
     vi.useRealTimers();
   });
 
-  const renderComponent = (initialState: FormsState) => {
+  const renderComponent = (initialState: RootState) => {
+    // Changed type to RootState
     store = mockStore(initialState);
     return render(
       <Provider store={store}>
@@ -32,9 +41,15 @@ describe('MainPage', () => {
   };
 
   it('should render correctly with no submissions', () => {
-    const initialState: FormsState = {
-      submissions: [],
-      newSubmissionId: null,
+    const initialState: RootState = {
+      // Changed type to RootState
+      forms: {
+        submissions: [],
+        newSubmissionId: null,
+      },
+      countries: {
+        list: ['Poland', 'Germany', 'USA'], // Ensure countries is always present
+      },
     };
     renderComponent(initialState);
     expect(screen.getByText('React Forms Application')).toBeInTheDocument();
@@ -59,9 +74,15 @@ describe('MainPage', () => {
       formType: 'react-hook-form' as const, // Explicitly cast formType
       timestamp: Date.now(),
     };
-    const initialState: FormsState = {
-      submissions: [submission],
-      newSubmissionId: null,
+    const initialState: RootState = {
+      // Changed type to RootState
+      forms: {
+        submissions: [submission],
+        newSubmissionId: null,
+      },
+      countries: {
+        list: ['Poland', 'Germany', 'USA'], // Ensure countries is always present
+      },
     };
     renderComponent(initialState);
     expect(
