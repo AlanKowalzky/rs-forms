@@ -1,0 +1,30 @@
+flowchart TD
+    A0["Użytkownik klika 'Otwórz modal'"] --> A1{"isOpen = true?"}
+    A1 -- "Tak" --> B0["Zapamiętaj aktywny element (document.activeElement)"]
+    B0 --> B1["Ustaw focus na przycisk 'Zamknij'"]
+    B1 --> C0["Dodaj event listenery: keydown(Escape, Tab), mousedown"]
+
+    %% Obsługa ESC
+    C0 -->|"Użytkownik naciska ESC"| D0["handleEscape()"]
+    D0 --> D1["onClose() → isOpen=false"]
+    
+    %% Obsługa TAB i SHIFT+TAB
+    C0 -->|"Użytkownik naciska TAB"| E0["handleTabKey()"]
+    E0 --> E1{"Focus na ostatnim elemencie?"}
+    E1 -- "Tak" --> E2["Przenieś focus na pierwszy element"]
+    E1 -- "Nie" --> E3["Normalne przejście do kolejnego"]
+
+    C0 -->|"Użytkownik naciska SHIFT+TAB"| F0["handleTabKey()"]
+    F0 --> F1{"Focus na pierwszym elemencie?"}
+    F1 -- "Tak" --> F2["Przenieś focus na ostatni element"]
+    F1 -- "Nie" --> F3["Normalne cofnięcie"]
+
+    %% Kliknięcie poza modalem
+    C0 -->|"Kliknięcie poza modalem"| G0["handleClickOutside()"]
+    G0 --> D1
+
+    %% Zamykanie
+    D1 --> H0["Usuń event listenery"]
+    H0 --> H1["Przywróć focus na prevActiveElement"]
+    H1 --> A2{"isOpen = false"}
+    A2 -- "Tak" --> Z0["Modal nie jest renderowany (return null)"]

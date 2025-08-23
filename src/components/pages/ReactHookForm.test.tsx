@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+/// <reference types="vitest/globals" />
+import { describe, it, expect, vi, beforeEach } from 'vitest'; // Ensure vi is imported
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -15,8 +16,8 @@ vi.mock('uuid', () => ({
 const mockStore = configureStore([thunk]);
 
 describe('ReactHookFormPage', () => {
-  let store: ReturnType<typeof mockStore>; // Fixed any type
-  let mockOnClose: vi.Mock; // Declare mockOnClose
+  let store: ReturnType<typeof mockStore>;
+  let mockOnClose: vi.Mock;
 
   beforeEach(() => {
     store = mockStore({
@@ -29,14 +30,14 @@ describe('ReactHookFormPage', () => {
       },
     });
     vi.clearAllMocks();
-    mockOnClose = vi.fn(); // Initialize mockOnClose
+    mockOnClose = vi.fn();
   });
 
   const renderComponent = () => {
     return render(
       <Provider store={store}>
         <MemoryRouter>
-          <ReactHookFormPage onClose={mockOnClose} /> {/* Pass mockOnClose */}
+          <ReactHookFormPage onClose={mockOnClose} />
         </MemoryRouter>
       </Provider>
     );
@@ -130,7 +131,7 @@ describe('ReactHookFormPage', () => {
           termsAccepted: true,
         })
       );
-      expect(mockOnClose).toHaveBeenCalledTimes(1); // New assertion
+      expect(mockOnClose).toHaveBeenCalledTimes(1);
     });
   });
 });

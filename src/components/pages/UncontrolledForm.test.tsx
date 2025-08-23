@@ -1,3 +1,4 @@
+/// <reference types="vitest/globals" />
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -15,7 +16,7 @@ vi.mock('uuid', () => ({
 const mockStore = configureStore([thunk]);
 
 describe('UncontrolledForm', () => {
-  let store: ReturnType<typeof mockStore>; // Fixed any type
+  let store: ReturnType<typeof mockStore>;
   let mockOnClose: vi.Mock; // Declare mockOnClose
 
   beforeEach(() => {

@@ -10,6 +10,7 @@ import {
   getPasswordStrength,
 } from '../../utils/validationSchema';
 import '../../styles/Form.css';
+import * as yup from 'yup'; // Import yup
 
 interface FormInputs {
   name: string;
@@ -19,7 +20,7 @@ interface FormInputs {
   confirmPassword: string;
   gender: string;
   termsAccepted: boolean;
-  image?: File | string;
+  image?: File | string | null;
   country: string;
 }
 
@@ -46,7 +47,7 @@ const ReactHookFormPage: React.FC<ReactHookFormPageProps> = ({ onClose }) => {
     watch,
     setValue,
   } = useForm<FormInputs>({
-    resolver: yupResolver(formValidationSchema),
+    resolver: yupResolver(formValidationSchema as yup.AnyObjectSchema), // Explicitly cast
     mode: 'onChange', // Enable live validation
   });
 

@@ -5,8 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import MainPage from './MainPage';
 import { thunk } from 'redux-thunk';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { clearNewSubmissionFlag, FormsState } from '../../store/formsSlice';
+import { FormsState } from '../../store/formsSlice';
 
 const mockStore = configureStore([thunk]);
 
@@ -57,7 +56,7 @@ describe('MainPage', () => {
       termsAccepted: true,
       image: null,
       country: 'USA',
-      formType: 'react-hook-form',
+      formType: 'react-hook-form' as const, // Explicitly cast formType
       timestamp: Date.now(),
     };
     const initialState: FormsState = {
