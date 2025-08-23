@@ -133,7 +133,9 @@ const UncontrolledForm = ({ onCloseModal }: UncontrolledFormProps) => {
 
         if (yupError.inner) {
           yupError.inner.forEach((err: import('yup').ValidationError) => {
-            newErrors[err.path] = err.message;
+            if (err.path) {
+              newErrors[err.path] = err.message;
+            }
           });
         }
 
