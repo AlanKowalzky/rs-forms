@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import formsReducer from './formsSlice';
 import countriesReducer from './countriesSlice';
+import modalReducer from './modalSlice'; // Importuj nowy reducer
 
 export const store = configureStore({
   reducer: {
     forms: formsReducer,
     countries: countriesReducer,
+    modal: modalReducer, // Dodaj nowy reducer
   },
 });
 

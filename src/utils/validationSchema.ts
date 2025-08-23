@@ -65,7 +65,7 @@ export const formValidationSchema = yup.object({
     .oneOf([true], 'You must accept the terms and conditions'),
 
   image: yup
-    .mixed()
+    .mixed<File | string>()
     .test('is-file-or-string', 'Please upload an image', function (value) {
       // Allow null during form initialization, but require a value for submission
       if (this.options.context?.isSubmitting && !value) {

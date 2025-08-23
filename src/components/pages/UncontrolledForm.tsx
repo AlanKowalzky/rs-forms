@@ -1,5 +1,5 @@
 import { useRef, useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+// Usuwamy useNavigate, nie będziemy nawigować, tylko zamykać modal
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { addFormSubmission } from '../../store/formsSlice';
@@ -13,8 +13,13 @@ interface ValidationErrors {
   [key: string]: string;
 }
 
-const UncontrolledForm = () => {
-  const navigate = useNavigate();
+// Dodaj props onCloseModal
+interface UncontrolledFormProps {
+  onCloseModal: () => void;
+}
+
+const UncontrolledForm = ({ onCloseModal }: UncontrolledFormProps) => {
+  // const navigate = useNavigate(); // Usuwamy useNavigate
   const dispatch = useAppDispatch();
   const countries = useAppSelector((state) => state.countries.list);
 
@@ -119,7 +124,8 @@ const UncontrolledForm = () => {
         })
       );
 
-      navigate('/');
+      // Zamiast navigate, wywołaj onCloseModal
+      onCloseModal();
     } catch (error) {
       if (error instanceof Error) {
         const yupError = error as import('yup').ValidationError;
@@ -127,7 +133,9 @@ const UncontrolledForm = () => {
 
         if (yupError.inner) {
           yupError.inner.forEach((err: import('yup').ValidationError) => {
-            newErrors[err.path] = err.message;
+            if (err.path) {
+              newErrors[err.path] = err.message;
+            }
           });
         }
 
@@ -306,6 +314,10 @@ const UncontrolledForm = () => {
 
         <button type="submit" className="submit-button">
           Submit
+        </button>
+        {/* Opcjonalnie przycisk zamykania modalu */}
+         <button type="button" className="submit-button" onClick={onCloseModal} style={{ marginTop: '0.5rem', backgroundColor: '#f44336' }}>
+           Cancel
         </button>
       </form>
     </div>
