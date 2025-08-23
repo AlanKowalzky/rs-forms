@@ -18,6 +18,7 @@ export default defineConfig({
         'src/**/*.test.{ts,tsx}',
         'src/main.tsx',
         'src/vite-env.d.ts',
+        'src/types.d.ts',
         'src/App.tsx',
       ], // Exclude test files and main.tsx
     },
