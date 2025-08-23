@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import formsReducer, { addFormSubmission, clearNewSubmissionFlag, FormData } from './formsSlice';
+import formsReducer, {
+  addFormSubmission,
+  clearNewSubmissionFlag,
+  FormData,
+} from './formsSlice';
 
 describe('formsSlice', () => {
   const initialState = {
@@ -26,7 +30,10 @@ describe('formsSlice', () => {
       timestamp: Date.now(),
     };
 
-    const nextState = formsReducer(initialState, addFormSubmission(newSubmission));
+    const nextState = formsReducer(
+      initialState,
+      addFormSubmission(newSubmission)
+    );
 
     expect(nextState.submissions).toHaveLength(1);
     expect(nextState.submissions[0]).toEqual(newSubmission);

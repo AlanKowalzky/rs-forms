@@ -2,8 +2,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { store } from './store';
 import MainPage from './components/pages/MainPage';
-import UncontrolledForm from './components/pages/UncontrolledForm';
-import ReactHookFormPage from './components/pages/ReactHookForm';
+// import UncontrolledForm from './components/pages/UncontrolledForm'; // Removed
+// import ReactHookFormPage from './components/pages/ReactHookForm'; // Removed
 import './App.css';
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/uncontrolled-form" element={<UncontrolledForm />} />
-          <Route path="/react-hook-form" element={<ReactHookFormPage />} />
+          {/* Removed: <Route path="/uncontrolled-form" element={<UncontrolledForm />} /> */}
+          {/* Removed: <Route path="/react-hook-form" element={<ReactHookFormPage />} /> */}
         </Routes>
       </BrowserRouter>
     </Provider>

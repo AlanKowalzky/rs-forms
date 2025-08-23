@@ -202,6 +202,8 @@ describe('countriesSlice', () => {
         'Zimbabwe',
       ],
     };
-    expect(countriesReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+    expect(countriesReducer(undefined, { type: 'unknown' })).toEqual(
+      initialState
+    );
   });
 });

@@ -1,5 +1,5 @@
 import { useRef, useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom'; // Removed
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { addFormSubmission } from '../../store/formsSlice';
@@ -13,8 +13,12 @@ interface ValidationErrors {
   [key: string]: string;
 }
 
-const UncontrolledForm = () => {
-  const navigate = useNavigate();
+interface UncontrolledFormProps {
+  onClose: () => void; // New prop
+}
+
+const UncontrolledForm: React.FC<UncontrolledFormProps> = ({ onClose }) => {
+  // const navigate = useNavigate(); // Removed
   const dispatch = useAppDispatch();
   const countries = useAppSelector((state) => state.countries.list);
 
@@ -109,7 +113,7 @@ const UncontrolledForm = () => {
       // Validate form data
       await formValidationSchema.validate(formData, { abortEarly: false });
 
-      // If validation passes, dispatch to Redux and navigate to main page
+      // If validation passes, dispatch to Redux and close modal
       dispatch(
         addFormSubmission({
           id: uuidv4(),
@@ -119,7 +123,7 @@ const UncontrolledForm = () => {
         })
       );
 
-      navigate('/');
+      onClose(); // Replaced navigate('/') with onClose()
     } catch (error) {
       if (error instanceof Error) {
         const yupError = error as import('yup').ValidationError;

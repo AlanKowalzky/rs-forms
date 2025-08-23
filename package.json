@@ -32,7 +32,6 @@
     "@types/react-dom": "^19.0.4",
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.3",
@@ -43,6 +42,7 @@
     "globals": "^15.15.0",
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
+    "lint-staged": "^15.2.7",
     "prettier": "3.5.3",
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^3.1.0",
@@ -50,5 +50,11 @@
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",
     "vitest": "^3.2.4"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

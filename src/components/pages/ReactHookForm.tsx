@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom'; // Removed
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,8 +23,12 @@ interface FormInputs {
   country: string;
 }
 
-const ReactHookFormPage = () => {
-  const navigate = useNavigate();
+interface ReactHookFormPageProps {
+  onClose: () => void; // New prop
+}
+
+const ReactHookFormPage: React.FC<ReactHookFormPageProps> = ({ onClose }) => {
+  // const navigate = useNavigate(); // Removed
   const dispatch = useAppDispatch();
   const countries = useAppSelector((state) => state.countries.list);
 
@@ -54,7 +58,7 @@ const ReactHookFormPage = () => {
     const strength = getPasswordStrength(e.target.value);
     setPasswordStrength(strength);
   };
-  
+
   // Update password strength when password changes via watch
   useEffect(() => {
     if (password) {
@@ -100,7 +104,7 @@ const ReactHookFormPage = () => {
 
   // Form submission handler
   const onSubmit = (data: FormInputs) => {
-    // Dispatch to Redux and navigate to main page
+    // Dispatch to Redux and close modal
     dispatch(
       addFormSubmission({
         id: uuidv4(),
@@ -111,7 +115,7 @@ const ReactHookFormPage = () => {
       })
     );
 
-    navigate('/');
+    onClose(); // Replaced navigate('/') with onClose()
   };
 
   return (
