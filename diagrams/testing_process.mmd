@@ -1,0 +1,28 @@
+graph TD
+    A[Start Testing Process] --> B{Identify Test Areas};
+    B --> C1[Utility Functions];
+    B --> C2[Redux Store];
+    B --> C3[Form Components];
+    B --> C4[Modal Component];
+
+    C1 --> D1[validationSchema.ts];
+    C2 --> D2[countriesSlice.ts];
+    C2 --> D3[formsSlice.ts];
+    C3 --> D4[UncontrolledForm.tsx];
+    C3 --> D5[ReactHookForm.tsx];
+    C4 --> D6[MainPage.tsx];
+    C4 --> D7[Modal.tsx];
+
+    D1 --> E1[Test Validation Logic];
+    D2 --> E2[Test Initial State];
+    D3 --> E3[Test Actions & Reducers];
+    D4 --> E4[Test Rendering, Validation, Submission];
+    D5 --> E5[Test Rendering, Live Validation, Submission];
+    D6 --> E6[Test Rendering, Data Display, Modal Interaction];
+    D7 --> E7[Test Open/Close, ESC, Click Outside, Focus Management];
+
+    E1 & E2 & E3 & E4 & E5 & E6 & E7 --> F[All Tests Implemented];
+    F --> G{Generate Coverage Report}; 
+    G --> H[Analyze Coverage];
+    H --> I[Identify Areas for Improvement];
+    I --> J[End Testing Process];

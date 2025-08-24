@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 src/diagrams/*
+coverage
+
+# Local Netlify folder
+.netlify
+*.pol.*

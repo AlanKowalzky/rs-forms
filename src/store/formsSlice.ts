@@ -14,7 +14,7 @@ export interface FormData {
   timestamp: number;
 }
 
-interface FormsState {
+export interface FormsState {
   submissions: FormData[];
   newSubmissionId: string | null;
 }
