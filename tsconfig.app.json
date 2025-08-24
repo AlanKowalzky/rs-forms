@@ -6,6 +6,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": ["@testing-library/jest-dom"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -22,5 +23,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ],
+  "exclude": [ // Added exclude
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "node_modules/@types/redux-mock-store/index.d.ts" // Exclude this as it's only for tests
+  ]
 }
