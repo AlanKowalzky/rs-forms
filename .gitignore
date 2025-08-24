@@ -27,3 +27,4 @@ coverage
 
 # Local Netlify folder
 .netlify
+*.pol.*

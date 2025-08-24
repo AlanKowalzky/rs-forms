@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# React Forms Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a demonstration of different approaches to handling forms in React, including uncontrolled components and the `react-hook-form` library. It features a shared, accessible modal component for form display, state management with Redux Toolkit, and comprehensive validation using Zod.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## English
 
-## Expanding the ESLint configuration
+### 1. Core Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-   **React Portals for Modals**: A single, reusable modal component is used to display two different forms. The modal is fully accessible, supporting focus management, closing with the `ESC` key, and closing by clicking outside the modal area.
+-   **State Management**: Redux Toolkit is used to manage the application's state. Data submitted from both forms is stored in the Redux store and displayed on the main page.
+-   **Two Form Approaches**:
+    1.  **Uncontrolled Form**: A standard form built using uncontrolled components, with validation on submit.
+    2.  **React Hook Form**: A form built using the `react-hook-form` library for efficient state management and live validation.
+-   **Comprehensive Validation**: Zod is used to define validation schemas for all form fields. Error messages are displayed consistently for a clean user experience.
+-   **Dynamic UI Updates**: After successful submission, the modal closes, and the new data is immediately displayed on the main page with a temporary highlight to indicate the new entry.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+### 2. Form Fields
+
+Both forms collect the following data:
+
+-   **Name**: Must start with an uppercase letter.
+-   **Age**: Must be a positive number.
+-   **Email**: Must be a valid email format.
+-   **Passwords**: Two fields that must match. A password strength indicator is displayed based on whether the password contains at least one number, one uppercase letter, one lowercase letter, and one special character.
+-   **Gender**: A `select` control.
+-   **Terms and Conditions**: A required checkbox.
+-   **Profile Picture**: An input to upload an image (`.png`, `.jpeg`). The image is validated for size, converted to Base64, and stored in the Redux store.
+-   **Country**: An autocomplete/select control with a list of countries sourced from the Redux store.
+
+### 3. Technical Requirements
+
+-   **Framework/Libraries**: React, TypeScript, Vite, Redux Toolkit, React Hook Form, Zod, Vitest, React Testing Library.
+-   **Code Quality**: The project adheres to strict TypeScript standards, avoiding `any` or `ts-ignore`.
+-   **Testing**: The application has a high unit test coverage (over 80%), including tests for form components, modals, Redux store logic, and utility functions.
+
+### 4. Project Setup
+
+```bash
+# Clone the repository
+git clone <repository-url>
+
+# Navigate to the project directory
+cd ts-forms-q3
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 5. Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+```bash
+# Run the development server
+npm run dev
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+# Run tests
+npm run test
+
+# Run linting
+npm run lint
 ```
